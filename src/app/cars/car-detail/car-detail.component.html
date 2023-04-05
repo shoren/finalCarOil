@@ -1,0 +1,27 @@
+<div class="panel panel-default" xmlns="http://www.w3.org/1999/html">
+    <div class="panel-heading">
+      <div class="row pad-all">
+        <h4 class="title margin-left-right">{{car.name}}</h4>
+        <div class="row pull-right margin-left-right">
+          <a class="btn btn-primary " style="cursor: pointer;">View</a>
+          <a class="btn btn-info" (click)="onEditcar()" style="cursor: pointer;" >Edit</a>
+          <a class="btn btn-danger" style="cursor: pointer;">Delete</a>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="pad-left-right">
+        <div class="row">
+          <label>Date Since last oil change:</label>
+          <span class="label-value">{{car.lastOilChangeDate}}</span>
+        </div>
+        <br>
+        <div class="row">
+          <label>Mileage:</label>
+          <span class="label-value">{{car.mileage}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row pad-left-right">
+        <span class="pull-left title">cars</span>
+        <a class="btn btn-success pull-right" (click)="OnNewcar()">Add Car</a>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="center-panel">
+        <cms-car-item 
+        *ngFor="let carEl of car; let i = index"
+        [car]="carEl"
+        [index]=" i"></cms-car-item>
+      </div>
+    </div>
+  
+  </div>
+  
