@@ -2,6 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { car } from './car.model';
 import { MOCKcarS } from './MOCKcars';
 import { Subject } from 'rxjs';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,16 @@ export class carService {
   private cars: car[] = []
   maxcarId: number;
 
-  constructor() {
+  // constructor() {
+  //   this.cars = MOCKcarS
+  //   this.maxcarId = this.getMaxId();
+  //  }
+
+   constructor(private http: HttpClient) {
     this.cars = MOCKcarS
-    this.maxcarId = this.getMaxId();
+    // this.maxDocumentId = this.getMaxId();
+    this.getCars();
+
    }
 
 
@@ -34,10 +42,26 @@ export class carService {
     return maxId;
 }
 
+
+
 // code go here to call back end
 // /api/cars
 // this.http.get<{types}>('http://localhost:3000/api/cars') replace this with 44 to get them from mongodb!
 // cars = this.array 
+
+getCars(){
+  this.http.get<car[]>('http://localhost:3000/api/cars')
+  .subscribe(
+    (cars: car[]) => {
+      this.cars = cars;
+      this.maxcarId = this.getMaxId();
+      this.carListChangedEvent.next(this.cars.slice());
+    },
+    (error: any) => {
+      console.error(error);
+    }
+  );
+ }
 
 
 

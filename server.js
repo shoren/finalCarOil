@@ -1,8 +1,11 @@
-//  wdd330.dr6ypkt.mongodb.net
+var dotenv = require('dotenv');
+dotenv.config();
+var url = process.env.DB_CONNECTION_STRING;
 // node server
 // const documentRoutes = require('./routes/document.routes');
 // const messageRoutes = require('./routes/message.routes');
 // const contactRoutes = require('./routes/contact.routes');
+const carRoutes = require('./server/routes/car');
 
 // Get dependencies
 //npm install
@@ -25,7 +28,7 @@ var app = express(); // create an instance of express
 
 
 // establish a connection to the mongo database
-mongoose.connect('mongodb+srv://shoren:B3ansandR1ce@wdd330.dr6ypkt.mongodb.net/cars',
+mongoose.connect(DB_CONNECTION_STRING,
    { useNewUrlParser: true }, (err, res) => {
       if (err) {
          console.log('Connection failed: ' + err);
@@ -66,6 +69,11 @@ app.use((req, res, next) => {
   next();
 });
 
+
+app.use('/api/cars',carRoutes)
+
+
+
 // Tell express to use the specified director as the
 // root directory for your web site
 app.use(express.static(path.join(__dirname, 'dist/caroil')));
@@ -95,9 +103,10 @@ app.get('*', (req, res) => {
 // GET
 app.get('/api/cars', (req, res) => {
   // Use the Car model to retrieve all cars from the database
-  Car.find()
+  car.find()
     .then(cars => {
       // return a json
+      console.log('i cant find this');
       res.json(cars);
     })
     .catch(err => {
